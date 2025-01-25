@@ -1,12 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <>
-      <h1>Hello World!</h1>
-    </>
-  );
+import Header from './components/Header';
+import Home from './pages/Home';
+
+export function App() {
+	const [favorites, setFavorites] = useState([]);
+
+	return (
+		<div className="container d-flex flex-column mx-auto">
+			<Router>
+				<Header />
+				<Routes>
+					<Route
+						path="/"
+						element={<Home favorites={favorites} setFavorites={setFavorites} />}
+					/>
+				</Routes>
+			</Router>
+		</div>
+	);
 }
-
-export default App;
