@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useProjects } from '../../hooks/useProjects';
 
 export function Home() {
-	const { projects, loading } = useProjects();
+	const { projects, isLoading } = useProjects();
 
 	const news = [
 		{
@@ -37,7 +37,7 @@ export function Home() {
 						</Link>
 					</section>
 
-					{loading && (
+					{isLoading && (
 						<div className="text-center">
 							<div className="spinner-border text-primary" role="status">
 								<span className="visually-hidden">Carregando...</span>
@@ -45,7 +45,7 @@ export function Home() {
 						</div>
 					)}
 
-					{!loading && projects && (
+					{!isLoading && projects && (
 						<section className="mb-5">
 							<h2 className="fw-bold mb-4">Projetos em destaque</h2>
 							<div className="row">

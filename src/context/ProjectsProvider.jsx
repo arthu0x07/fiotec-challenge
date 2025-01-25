@@ -6,7 +6,7 @@ export const ProjectsContext = createContext();
 
 export function ProjectsProvider({ children }) {
 	const [projects, setProjects] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [isLoading, setisLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchProjectsWithTimeout = async () => {
@@ -18,7 +18,7 @@ export function ProjectsProvider({ children }) {
 			} catch (error) {
 				console.error('Erro ao buscar os projetos:', error);
 			} finally {
-				setLoading(false);
+				setisLoading(false);
 			}
 		};
 
@@ -26,7 +26,7 @@ export function ProjectsProvider({ children }) {
 	}, []);
 
 	return (
-		<ProjectsContext.Provider value={{ projects, loading }}>
+		<ProjectsContext.Provider value={{ projects, isLoading }}>
 			{children}
 		</ProjectsContext.Provider>
 	);
