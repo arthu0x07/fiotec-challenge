@@ -1,3 +1,10 @@
-export default function Home({ setFavorites }) {
-	return <h1>Hello</h1>;
+import { Aside } from '../../components/Aside';
+
+export function Home({ setFavorites }) {
+	return (
+		<div className="d-flex mt-5">
+			<Aside />
+			<h1>Home</h1>
+		</div>
+	);
 }
