@@ -53,21 +53,21 @@ export function TopProjects() {
 										src={project.image}
 										alt={project.title}
 										className="w-100 mb-2"
-										style={{ height: '150px', objectFit: 'cover' }}
+										style={{ height: '180px', objectFit: 'cover' }}
 									/>
 
 									<div className="card-body d-flex flex-column justify-content-between ">
 										<h5
-											className="card-title text-center mb-4"
+											className="card-title text-center mb-4 fw-bold fs-5"
 											style={{ height: '4.5rem' }}
 										>
 											{project.title}
 										</h5>
 										<p
-											className="text-muted text-center align-self-end mb-4"
+											className="text-muted text-center align-self-end mb-4 fw-medium fs-5"
 											style={{
 												display: '-webkit-box',
-												WebkitLineClamp: 4,
+												WebkitLineClamp: 3,
 												WebkitBoxOrient: 'vertical',
 												overflow: 'hidden',
 											}}
@@ -80,7 +80,7 @@ export function TopProjects() {
 										<Cardbutton
 											to={`/project/${project.id}`}
 											icon={ViewImage}
-											text="Visualizar"
+											text="Acessar"
 											variant="view"
 										/>
 
