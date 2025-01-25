@@ -8,10 +8,12 @@
 		"build": "vite build",
 		"lint": "eslint --config eslint.config.js --fix",
 		"preview": "vite preview",
-		"format": "prettier --write \"src/**/*.{js,jsx}\""
+		"format": "prettier --write \"src/**/*.{js,jsx}\"",
+		"json-server": "npx json-server ./src/db/db.json"
 	},
 	"dependencies": {
 		"bootstrap": "^5.3.3",
+		"json-server": "^1.0.0-beta.3",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-router-dom": "^7.1.3"
