@@ -6,11 +6,13 @@ export const ProjectsContext = createContext();
 
 export function ProjectsProvider({ children }) {
 	const [projects, setProjects] = useState([]);
-	const [isLoading, setisLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 	const [favoritesProjects, setFavoritesProjects] = useState([]);
+	const [selectedFilter, setSelectedFilter] = useState('Todos');
+	const [filteredProjects, setFilteredProjects] = useState([]);
 
 	useEffect(() => {
-		const fetchProjectsWithTimeout = async () => {
+		const fetchProjects = async () => {
 			try {
 				await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -19,11 +21,11 @@ export function ProjectsProvider({ children }) {
 			} catch (error) {
 				console.error('Erro ao buscar os projetos:', error);
 			} finally {
-				setisLoading(false);
+				setIsLoading(false);
 			}
 		};
 
-		fetchProjectsWithTimeout();
+		fetchProjects();
 	}, []);
 
 	useEffect(() => {
@@ -32,6 +34,18 @@ export function ProjectsProvider({ children }) {
 		);
 		setFavoritesProjects(favorites);
 	}, [projects]);
+
+	useEffect(() => {
+		if (selectedFilter === 'Todos') {
+			setFilteredProjects(projects);
+		} else {
+			setFilteredProjects(
+				projects.filter(project =>
+					project.category.toLowerCase().includes(selectedFilter.toLowerCase()),
+				),
+			);
+		}
+	}, [selectedFilter, projects]);
 
 	const handleAddFavorite = projectId => {
 		const isAlreadyFavorite = favoritesProjects.includes(projectId);
@@ -53,9 +67,21 @@ export function ProjectsProvider({ children }) {
 		}
 	};
 
+	const handleFilterChange = filter => {
+		setSelectedFilter(filter);
+	};
+
 	return (
 		<ProjectsContext.Provider
-			value={{ projects, isLoading, handleAddFavorite, favoritesProjects }}
+			value={{
+				projects,
+				isLoading,
+				handleAddFavorite,
+				favoritesProjects,
+				filteredProjects,
+				selectedFilter,
+				handleFilterChange,
+			}}
 		>
 			{children}
 		</ProjectsContext.Provider>

@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import HeartImage from '../../assets/heart_icon.png';
-import ViewImage from '../../assets/view_icon.png';
 import { Aside } from '../../components/Aside';
 import { Cardbutton } from '../../components/CardButton';
 import { Loading } from '../../components/Loading';
 import { useProjects } from '../../hooks/useProjects';
 
 export function TopProjects() {
-	const { projects, isLoading, handleAddFavorite, favoritesProjects } =
-		useProjects();
-
-	const [selectedFilter, setSelectedFilter] = useState('Todos');
-
-	const handleFilterChange = filter => {
-		setSelectedFilter(filter);
-	};
-
-	const filteredProjects =
-		selectedFilter === 'Todos'
-			? projects
-			: projects.filter(project =>
-					project.category.toLowerCase().includes(selectedFilter.toLowerCase()),
-				);
-
-	const toggleFavorite = projectId => {
-		handleAddFavorite(projectId);
-	};
+	const {
+		isLoading,
+		filteredProjects,
+		handleAddFavorite,
+		favoritesProjects,
+		handleFilterChange,
+	} = useProjects();
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -42,7 +28,7 @@ export function TopProjects() {
 					<p className="text-muted mb-0">
 						{isLoading
 							? 'Carregando...'
-							: `Mostrando ${filteredProjects.length} de ${projects.length} projetos`}
+							: `Mostrando ${filteredProjects.length} projetos`}
 					</p>
 				</div>
 
@@ -60,7 +46,7 @@ export function TopProjects() {
 										style={{ height: '180px', objectFit: 'cover' }}
 									/>
 
-									<div className="card-body d-flex flex-column justify-content-between ">
+									<div className="card-body d-flex flex-column justify-content-between">
 										<h5
 											className="card-title text-center mb-4 fw-bold fs-5"
 											style={{ height: '4.5rem' }}
@@ -83,18 +69,16 @@ export function TopProjects() {
 									<div className="d-flex justify-content-center w-100 gap-2">
 										<Cardbutton
 											to={`/project/${project.id}`}
-											icon={ViewImage}
 											text="Acessar"
 											variant="view"
 										/>
 
 										<Cardbutton
 											to={null}
-											icon={HeartImage}
 											text="Favoritar"
 											variant="favorite"
 											isActive={favoritesProjects.includes(project.id)}
-											onClick={() => toggleFavorite(project.id)}
+											onClick={() => handleAddFavorite(project.id)}
 										/>
 									</div>
 								</div>

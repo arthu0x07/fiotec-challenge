@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { ProjectsProvider } from './context/ProjectsProvider';
 import { Favorites } from './pages/Favorites';
 import { Home } from './pages/Home';
+import { ProjectDetails } from './pages/ProjectDetails';
 import { TopProjects } from './pages/TopProjects';
 
 import './App.css';
@@ -20,6 +21,7 @@ export function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="top-projects" element={<TopProjects />} />
 							<Route path="favorites" element={<Favorites />} />
+							<Route path="project/:id" element={<ProjectDetails />} />
 						</Routes>
 					</div>
 				</Router>
