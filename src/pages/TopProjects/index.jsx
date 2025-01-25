@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import HeartImage from '../../assets/heart_icon.png';
 import ViewImage from '../../assets/view_icon.png';
@@ -27,6 +27,10 @@ export function TopProjects() {
 	const toggleFavorite = projectId => {
 		handleAddFavorite(projectId);
 	};
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	return (
 		<div className="d-flex mt-5 flex-wrap lg-d-block flex-lg-nowrap mb-5">

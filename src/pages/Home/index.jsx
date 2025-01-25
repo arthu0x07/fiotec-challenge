@@ -71,7 +71,11 @@ export function Home() {
 													<br />
 													<strong>Financiador:</strong> Fiocruz
 												</p>
-												<button className="btn btn-primary">Saiba mais</button>
+												<Link to={'/top-projects'} className="">
+													<button className="btn btn-primary">
+														Saiba mais
+													</button>
+												</Link>
 											</div>
 										</div>
 									</div>
