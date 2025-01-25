@@ -32,10 +32,7 @@ export function Home() {
 							Promovendo inovação, pesquisa e desenvolvimento para apoiar a
 							saúde pública.
 						</p>
-						<Link
-							to={'/highlighted-projects'}
-							className="btn btn-primary btn-lg mt-5"
-						>
+						<Link to={'/top-projects'} className="btn btn-primary btn-lg mt-5">
 							Conheça nossos projetos
 						</Link>
 					</section>

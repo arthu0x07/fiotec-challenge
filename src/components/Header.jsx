@@ -10,7 +10,7 @@ export function Header() {
 
 	const navLinks = [
 		{ path: '/', label: 'Home' },
-		{ path: '/highlighted-projects', label: 'Projetos em Destaque' },
+		{ path: '/top-projects', label: 'Projetos em Destaque' },
 		{ path: '/favorites', label: 'Meus Favoritos' },
 	];
 
@@ -53,7 +53,6 @@ export function Header() {
 						</div>
 					</Link>
 
-					{/* Botão do menu hambúrguer para telas pequenas */}
 					<button
 						className="navbar-toggler d-lg-none"
 						type="button"
@@ -63,7 +62,6 @@ export function Header() {
 						<span className="navbar-toggler-icon"></span>
 					</button>
 
-					{/* Menu deslizante para telas pequenas */}
 					<div
 						className={`offcanvas offcanvas-end py-4 d-lg-none ${menuOpen ? 'show' : ''}`}
 						tabIndex="-1"
