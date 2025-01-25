@@ -55,7 +55,7 @@ export function Aside({ onFilterChange }) {
 			</div>
 
 			<div className="w-100 d-lg-none">
-				<div className="d-lg-none w-25">
+				<div className="d-lg-none w-50">
 					<div className="dropdown">
 						<div>
 							<button
