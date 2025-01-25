@@ -18,14 +18,20 @@ export function Header() {
 		<header className="py-4 w-100 shadow">
 			<div className="container">
 				<nav className="navbar navbar-light d-flex justify-content-between align-items-center">
-					<div
-						style={{
-							width: '300px',
-						}}
-					>
+					<div className="relative d-flex">
 						<Link className="navbar-brand d-flex align-items-center m-0" to="/">
 							<img src={logoImage} alt="Fiotec Logo" />
 						</Link>
+						<div
+							style={{
+								width: '118px',
+								minHeight: '0px',
+								height: 'auto',
+								left: '0px',
+								display: 'block',
+							}}
+							className="d-none d-lg-block"
+						/>
 					</div>
 
 					<ul className="navbar-nav d-flex flex-row pb-1 gap-4 fw-bold align-self-end fs-6 d-none d-lg-flex ms-5">
