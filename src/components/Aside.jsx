@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 
 const filters = [
-	{ label: 'Todos', value: 'all' },
-	{ label: 'Ensino', value: 'ensino' },
-	{ label: 'Pesquisa', value: 'pesquisa' },
-	{ label: 'Estímulo à Inovação', value: 'inovacao' },
-	{ label: 'Extensão', value: 'extensao' },
-	{ label: 'Desenvolvimento Institucional', value: 'institucional' },
-	{ label: 'Desenvolvimento Científico e Tecnológico', value: 'cientifico' },
+	{ label: 'Todos', value: 'Todos' },
+	{ label: 'Ensino', value: 'Ensino' },
+	{ label: 'Pesquisa', value: 'Pesquisa' },
+	{ label: 'Estímulo à Inovação', value: 'Estímulo à Inovação' },
+	{ label: 'Extensão', value: 'Extensão' },
+	{
+		label: 'Desenvolvimento Institucional',
+		value: 'Desenvolvimento Institucional',
+	},
+	{
+		label: 'Desenvolvimento Científico e Tecnológico',
+		value: 'Desenvolvimento Científico e Tecnológico',
+	},
 ];
 
-const handleFilterClick = value => {
-	console.log('Filtro selecionado:', value);
-};
-
-export function Aside() {
+export function Aside({ onFilterChange }) {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
 	const toggleDropdown = () => {
 		setDropdownOpen(!dropdownOpen);
+	};
+
+	const handleFilterClick = value => {
+		onFilterChange(value);
 	};
 
 	return (
@@ -35,7 +41,10 @@ export function Aside() {
 								<a
 									href="#"
 									className="text-decoration-none text-dark"
-									onClick={() => handleFilterClick(filter.value)}
+									onClick={e => {
+										e.preventDefault();
+										handleFilterClick(filter.value);
+									}}
 								>
 									{filter.label}
 								</a>
@@ -48,15 +57,17 @@ export function Aside() {
 			<div className="w-100 d-lg-none">
 				<div className="d-lg-none w-25">
 					<div className="dropdown">
-						<button
-							className="btn btn-secondary w-100"
-							type="button"
-							onClick={toggleDropdown}
-						>
-							Filtrar por categoria
-						</button>
+						<div>
+							<button
+								className="btn btn-secondary w-100 mb-4"
+								type="button"
+								onClick={toggleDropdown}
+							>
+								Filtrar por categoria
+							</button>
+						</div>
 						<ul
-							className={`dropdown-menu ${dropdownOpen ? 'd-block' : 'd-none'}`}
+							className={`dropdown-menu mt-n5 ${dropdownOpen ? 'd-block' : 'd-none'}`}
 							aria-labelledby="dropdownMenuButton"
 						>
 							{filters.map(filter => (
@@ -64,7 +75,11 @@ export function Aside() {
 									<a
 										className="dropdown-item"
 										href="#"
-										onClick={() => handleFilterClick(filter.value)}
+										onClick={e => {
+											e.preventDefault();
+											dropdownOpen && toggleDropdown();
+											handleFilterClick(filter.value);
+										}}
 									>
 										{filter.label}
 									</a>

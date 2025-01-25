@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Aside } from '../../components/Aside';
@@ -7,25 +7,39 @@ import { useProjects } from '../../hooks/useProjects';
 
 export function TopProjects() {
 	const { projects, isLoading } = useProjects();
+	
+	const [selectedFilter, setSelectedFilter] = useState('all');
+
+	const handleFilterChange = filter => {
+		setSelectedFilter(filter);
+	};
+
+	const filteredProjects =
+		selectedFilter === 'Todos'
+			? projects
+			: projects.filter(project =>
+					project.category.toLowerCase().includes(selectedFilter.toLowerCase()),
+				);
 
 	return (
 		<div className="d-flex mt-5 flex-wrap lg-d-block flex-lg-nowrap mb-5">
-			<Aside />
-			<div className="container">
+			<Aside onFilterChange={handleFilterChange} />
+
+			<div className="container p-0">
 				<div className="d-flex justify-content-between align-items-center mb-4">
 					<h2 className="fs-4">Projetos em Destaque</h2>
-					<p className="text-muted">
+					<p className="text-muted mb-0">
 						{isLoading
 							? 'Carregando...'
-							: `Mostrando ${projects.length} de ${projects.length} projetos`}
+							: `Mostrando ${filteredProjects.length} de ${projects.length} projetos`}
 					</p>
 				</div>
 
 				{isLoading ? (
 					<Loading />
 				) : (
-					<div className="row row-cols-1 row-cols-md-3 g-4">
-						{projects.map(project => (
+					<div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+						{filteredProjects.map(project => (
 							<div className="col" key={project.id}>
 								<div className="card h-100 shadow-sm">
 									<img
