@@ -15,7 +15,7 @@ export function App() {
 			<ProjectsProvider>
 				<Router>
 					<Header />
-					<div className="container-lg d-flex flex-column mx-auto">
+					<div className="container d-flex flex-column mx-auto">
 						<Routes>
 							<Route path="/" element={<Home />} />
 							<Route path="top-projects" element={<TopProjects />} />
