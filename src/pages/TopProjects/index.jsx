@@ -47,34 +47,36 @@ export function TopProjects() {
 				) : (
 					<div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
 						{filteredProjects.map(project => (
-							<div className="col" key={project.id}>
-								<div className="card h-100 shadow-sm">
+							<div className="col mb-5" key={project.id}>
+								<div className="h-100 w-100">
 									<img
 										src={project.image}
-										className="card-img-top"
 										alt={project.title}
+										className="w-100 mb-2"
 										style={{ height: '150px', objectFit: 'cover' }}
 									/>
 
 									<div className="card-body d-flex flex-column justify-content-between ">
-										<h5 className="card-title text-center mb-4">
+										<h5
+											className="card-title text-center mb-4"
+											style={{ height: '4.5rem' }}
+										>
 											{project.title}
 										</h5>
 										<p
-											className="card-text text-muted text-center align-self-end"
+											className="text-muted text-center align-self-end mb-4"
 											style={{
-												textOverflow: 'ellipsis',
-												overflow: 'hidden',
 												display: '-webkit-box',
 												WebkitLineClamp: 4,
 												WebkitBoxOrient: 'vertical',
+												overflow: 'hidden',
 											}}
 										>
 											{project.description}...
 										</p>
 									</div>
 
-									<div className="card-footer d-flex justify-content-between">
+									<div className="d-flex justify-content-center w-100 gap-2">
 										<Cardbutton
 											to={`/project/${project.id}`}
 											icon={ViewImage}
