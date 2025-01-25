@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import axios from 'axios';
+import { useProjects } from '../../hooks/useProjects';
 
-export function Home({ setFavorites }) {
-	const [projects, setProjects] = useState([]);
-
-	useEffect(() => {
-		axios
-			.get('http://localhost:3000/projetos')
-			.then(response => {
-				setProjects(response.data);
-			})
-			.catch(error => {
-				console.error('Erro ao buscar os projetos:', error);
-			});
-	}, []);
+export function Home() {
+	const { projects, loading } = useProjects();
 
 	const news = [
 		{
@@ -51,7 +40,15 @@ export function Home({ setFavorites }) {
 						</Link>
 					</section>
 
-					{projects && (
+					{loading && (
+						<div className="text-center">
+							<div className="spinner-border text-primary" role="status">
+								<span className="visually-hidden">Carregando...</span>
+							</div>
+						</div>
+					)}
+
+					{!loading && projects && (
 						<section className="mb-5">
 							<h2 className="fw-bold mb-4">Projetos em destaque</h2>
 							<div className="row">
@@ -90,8 +87,8 @@ export function Home({ setFavorites }) {
 							</div>
 						</section>
 					)}
-					{/* Últimas Notícias */}
-					<section className="mb-5">
+
+					<section className="mb-5 mt-5">
 						<h2 className="fw-bold mb-4">Últimas Notícias</h2>
 						<div className="list-group">
 							{news.map((item, index) => (
@@ -105,7 +102,6 @@ export function Home({ setFavorites }) {
 							))}
 						</div>
 					</section>
-					{/* Contato */}
 					<section>
 						<h2 className="fw-bold mb-4">Contato</h2>
 						<div className="row">
