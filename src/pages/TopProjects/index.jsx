@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Aside } from '../../components/Aside';
+import { Loading } from '../../components/Loading';
 import { useProjects } from '../../hooks/useProjects';
 
 export function TopProjects() {
@@ -21,11 +22,7 @@ export function TopProjects() {
 				</div>
 
 				{isLoading ? (
-					<div className="text-center my-5">
-						<div className="spinner-border text-primary" role="status">
-							<span className="visually-hidden">Carregando...</span>
-						</div>
-					</div>
+					<Loading />
 				) : (
 					<div className="row row-cols-1 row-cols-md-3 g-4">
 						{projects.map(project => (

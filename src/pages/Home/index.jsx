@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Loading } from '../../components/Loading';
 import { useProjects } from '../../hooks/useProjects';
 
 export function Home() {
@@ -37,13 +38,7 @@ export function Home() {
 						</Link>
 					</section>
 
-					{isLoading && (
-						<div className="text-center">
-							<div className="spinner-border text-primary" role="status">
-								<span className="visually-hidden">Carregando...</span>
-							</div>
-						</div>
-					)}
+					{isLoading && <Loading />}
 
 					{!isLoading && projects && (
 						<section className="mb-5">
