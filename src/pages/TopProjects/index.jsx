@@ -7,8 +7,8 @@ import { useProjects } from '../../hooks/useProjects';
 
 export function TopProjects() {
 	const { projects, isLoading } = useProjects();
-	
-	const [selectedFilter, setSelectedFilter] = useState('all');
+
+	const [selectedFilter, setSelectedFilter] = useState('Todos');
 
 	const handleFilterChange = filter => {
 		setSelectedFilter(filter);
