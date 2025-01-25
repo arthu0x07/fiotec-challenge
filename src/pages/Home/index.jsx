@@ -1,30 +1,21 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
 export function Home({ setFavorites }) {
-	const projects = [
-		{
-			title: 'Combate à doença de Chagas na América Latina',
-			nature: 'Pesquisa',
-			funder: 'Fiocruz',
-		},
-		{
-			title:
-				'Conhecimento protege: formação de defensores dos direitos LGBTQIA+',
-			nature: 'Ensino',
-			funder: 'Fiocruz',
-		},
-		{
-			title: 'Profilaxia Pré-Exposição (PrEP) no combate ao HIV',
-			nature: 'Pesquisa',
-			funder: 'Unitaid',
-		},
-		{
-			title:
-				'Fiocruz garante soberania nacional na produção da vacina contra Covid-19',
-			nature: 'Estímulo à Inovação',
-			funder: 'Fiocruz',
-		},
-	];
+	const [projects, setProjects] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get('http://localhost:3000/projetos')
+			.then(response => {
+				setProjects(response.data);
+			})
+			.catch(error => {
+				console.error('Erro ao buscar os projetos:', error);
+			});
+	}, []);
 
 	const news = [
 		{
@@ -60,27 +51,46 @@ export function Home({ setFavorites }) {
 						</Link>
 					</section>
 
-					<section className="mb-5">
-						<h2 className="fw-bold mb-4">Projetos em destaque</h2>
-						<div className="row">
-							{projects.map((project, index) => (
-								<div className="col-md-6 col-lg-4 mb-4" key={index}>
-									<div className="card shadow-sm h-100">
-										<div className="card-body">
-											<h5 className="card-title fw-bold">{project.title}</h5>
-											<p className="card-text">
-												<strong>Natureza:</strong> {project.nature}
-												<br />
-												<strong>Financiador:</strong> {project.funder}
-											</p>
-											<button className="btn btn-primary">Saiba mais</button>
+					{projects && (
+						<section className="mb-5">
+							<h2 className="fw-bold mb-4">Projetos em destaque</h2>
+							<div className="row">
+								{projects.map(project => (
+									<div className="col-md-6 col-lg-4 mb-4" key={project.id}>
+										<div className="card shadow-sm h-100">
+											<img
+												src={project.image}
+												className="card-img-top"
+												alt={project.title}
+												style={{ height: '200px', objectFit: 'cover' }}
+											/>
+											<div className="card-body d-flex flex-column justify-content-between">
+												<h5
+													className="card-title fw-bold"
+													style={{
+														textOverflow: 'ellipsis',
+														overflow: 'hidden',
+														display: '-webkit-box',
+														WebkitLineClamp: 2,
+														WebkitBoxOrient: 'vertical',
+													}}
+												>
+													{project.title}
+												</h5>
+												<p className="card-text mb-4">
+													<strong>Natureza:</strong> {project.category}
+													<br />
+													<strong>Financiador:</strong> Fiocruz
+												</p>
+												<button className="btn btn-primary">Saiba mais</button>
+											</div>
 										</div>
 									</div>
-								</div>
-							))}
-						</div>
-					</section>
-
+								))}
+							</div>
+						</section>
+					)}
+					{/* Últimas Notícias */}
 					<section className="mb-5">
 						<h2 className="fw-bold mb-4">Últimas Notícias</h2>
 						<div className="list-group">
@@ -95,7 +105,7 @@ export function Home({ setFavorites }) {
 							))}
 						</div>
 					</section>
-
+					{/* Contato */}
 					<section>
 						<h2 className="fw-bold mb-4">Contato</h2>
 						<div className="row">
