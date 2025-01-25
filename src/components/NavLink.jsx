@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export function NavLink({ to, children, additionalClasses = '' }) {
+export function NavLink({ to, children }) {
 	const location = useLocation();
 	const isActive = location.pathname === to;
 	const classes = `nav-link ${isActive ? 'active text-info' : ''}`;
