@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
+import HeartImage from '../../assets/heart_icon.png';
+import ViewImage from '../../assets/view_icon.png';
 import { Aside } from '../../components/Aside';
+import { Cardbutton } from '../../components/CardButton';
 import { Loading } from '../../components/Loading';
 import { useProjects } from '../../hooks/useProjects';
 
 export function TopProjects() {
-	const { projects, isLoading } = useProjects();
+	const { projects, isLoading, handleAddFavorite, favoritesProjects } =
+		useProjects();
 
 	const [selectedFilter, setSelectedFilter] = useState('Todos');
 
@@ -20,6 +23,10 @@ export function TopProjects() {
 			: projects.filter(project =>
 					project.category.toLowerCase().includes(selectedFilter.toLowerCase()),
 				);
+
+	const toggleFavorite = projectId => {
+		handleAddFavorite(projectId);
+	};
 
 	return (
 		<div className="d-flex mt-5 flex-wrap lg-d-block flex-lg-nowrap mb-5">
@@ -49,7 +56,7 @@ export function TopProjects() {
 										style={{ height: '150px', objectFit: 'cover' }}
 									/>
 
-									<div className="card-body d-flex flex-column justify-content-between">
+									<div className="card-body d-flex flex-column justify-content-between ">
 										<h5 className="card-title text-center mb-4">
 											{project.title}
 										</h5>
@@ -68,18 +75,21 @@ export function TopProjects() {
 									</div>
 
 									<div className="card-footer d-flex justify-content-between">
-										<Link
+										<Cardbutton
 											to={`/project/${project.id}`}
-											className="btn btn-outline-primary"
-										>
-											Acessar
-										</Link>
-										<button className="btn btn-outline-danger">
-											<span role="img" aria-label="favorite">
-												❤️
-											</span>
-											Favoritar
-										</button>
+											icon={ViewImage}
+											text="Visualizar"
+											variant="view"
+										/>
+
+										<Cardbutton
+											to={null}
+											icon={HeartImage}
+											text="Favoritar"
+											variant="favorite"
+											isActive={favoritesProjects.includes(project.id)}
+											onClick={() => toggleFavorite(project.id)}
+										/>
 									</div>
 								</div>
 							</div>
