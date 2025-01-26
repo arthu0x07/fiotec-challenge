@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { useFavorites } from '../../hooks/useFavorites';
 import { useProjects } from '../../hooks/useProjects';
 
 export function Favorites() {
-	const { projects, favoritesProjects } = useProjects();
+	const { projects } = useProjects();
+	const { favorites } = useFavorites();
 
 	const favoriteProjects = projects.filter(project =>
-		favoritesProjects.includes(project.id),
+		favorites.includes(project.id),
 	);
 
 	return (

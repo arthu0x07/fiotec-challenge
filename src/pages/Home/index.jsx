@@ -74,7 +74,9 @@ export function Home() {
 
 			<section className="my-5">
 				<div className="container">
-					<h2 className="fw-bold text-center mb-5">Projetos em Destaque</h2>
+					<h2 className="fw-bold text-center mb-5 fs-5">
+						Projetos em Destaque
+					</h2>
 					{isLoading ? (
 						<Loading />
 					) : (

@@ -1,34 +1,37 @@
 import React, { useEffect } from 'react';
 
+import HeartImage from '../../assets/heart_icon.png';
+import ViewImage from '../../assets/view_icon.png';
 import { Aside } from '../../components/Aside';
 import { Cardbutton } from '../../components/CardButton';
 import { Loading } from '../../components/Loading';
+import { ProjectCard } from '../../components/ProjectCard';
+import { useFavorites } from '../../hooks/useFavorites';
+import { useFilter } from '../../hooks/useFilter';
 import { useProjects } from '../../hooks/useProjects';
 
 export function TopProjects() {
-	const {
-		isLoading,
-		filteredProjects,
-		handleAddFavorite,
-		favoritesProjects,
-		handleFilterChange,
-	} = useProjects();
+	const { isLoading, error, projects } = useProjects();
+	const { filteredProjects, selectedFilter, handleFilterChange } =
+		useFilter(projects);
+
+	const { favorites, toggleFavorite } = useFavorites();
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
 
+	if (isLoading) return <Loading />;
+	if (error) return <p className="text-danger text-center">{error}</p>;
+
 	return (
 		<div className="d-flex mt-5 flex-wrap lg-d-block flex-lg-nowrap mb-5">
 			<Aside onFilterChange={handleFilterChange} />
-
 			<div className="container p-0">
 				<div className="d-flex justify-content-between align-items-center mb-4">
-					<h2 className="fs-4">Projetos em Destaque</h2>
+					<h2 className="fs-5 fw-bold">Projetos em Destaque</h2>
 					<p className="text-muted mb-0">
-						{isLoading
-							? 'Carregando...'
-							: `Mostrando ${filteredProjects.length} projetos`}
+						Mostrando {filteredProjects.length} projetos
 					</p>
 				</div>
 
@@ -70,6 +73,7 @@ export function TopProjects() {
 										<Cardbutton
 											to={`/project/${project.id}`}
 											text="Acessar"
+											icon={ViewImage}
 											variant="view"
 										/>
 
@@ -77,8 +81,9 @@ export function TopProjects() {
 											to={null}
 											text="Favoritar"
 											variant="favorite"
-											isActive={favoritesProjects.includes(project.id)}
-											onClick={() => handleAddFavorite(project.id)}
+											icon={HeartImage}
+											isActive={favorites.includes(project.id)}
+											onClick={() => toggleFavorite(project.id)}
 										/>
 									</div>
 								</div>

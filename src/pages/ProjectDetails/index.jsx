@@ -3,12 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { Aside } from '../../components/Aside';
 import { Loading } from '../../components/Loading';
+import { useFilter } from '../../hooks/useFilter';
 import { useProjects } from '../../hooks/useProjects';
 
 export function ProjectDetails() {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const { projects, isLoading, handleFilterChange } = useProjects();
+
+	const { projects, isLoading } = useProjects();
+	const { handleFilterChange } = useFilter(projects);
 
 	const project = projects.find(project => project.id == parseInt(id));
 
@@ -42,8 +45,10 @@ export function ProjectDetails() {
 				}}
 			/>
 
-			<div className="container my-5 p-0">
-				<h1 className="fw-bold mb-4 fs-4">{project.title}</h1>
+			<div className="container mb-5 p-0">
+				<h2 className="fs-5 fw-bold mb-5">Projetos em Destaque</h2>
+
+				<h1 className="fw-bold mb-4 fs-4 mt-5">{project.title}</h1>
 				<img
 					src={project.image}
 					alt={project.title}
