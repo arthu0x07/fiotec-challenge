@@ -5,7 +5,6 @@ import ViewImage from '../../assets/view_icon.png';
 import { Aside } from '../../components/Aside';
 import { Cardbutton } from '../../components/CardButton';
 import { Loading } from '../../components/Loading';
-import { ProjectCard } from '../../components/ProjectCard';
 import { useFavorites } from '../../hooks/useFavorites';
 import { useFilter } from '../../hooks/useFilter';
 import { useProjects } from '../../hooks/useProjects';
