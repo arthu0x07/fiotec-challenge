@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../components/Loading';
+import { SmallProjectCard } from '../../components/SmallProjectCard';
 import { useProjects } from '../../hooks/useProjects';
 
 export function Home() {
@@ -24,6 +25,24 @@ export function Home() {
 		{
 			title: 'Estamos no Janeiro Branco 2025',
 			link: 'https://www.fiotec.fiocruz.br/noticias/outros/8821-estamos-no-janeiro-branco-2025',
+		},
+	];
+
+	const contactInfo = [
+		{
+			location: 'Rio de Janeiro (Sede)',
+			address: 'Avenida Brasil, 4036, Manguinhos',
+			postalCode: 'CEP: 21040-361',
+			phone: '+55 21 4040-4418',
+			hours: 'Horário: 8h às 17h',
+		},
+		{
+			location: 'Brasília (Escritório)',
+			address:
+				'Avenida L3 Norte, Campus Universitário Darcy Ribeiro UNB Gleba A, SC4',
+			postalCode: 'CEP: 70.904-970',
+			phone: '+55 61 4040-4803',
+			hours: 'Horário: 8h30 às 17h30',
 		},
 	];
 
@@ -56,48 +75,12 @@ export function Home() {
 			<section className="my-5">
 				<div className="container">
 					<h2 className="fw-bold text-center mb-5">Projetos em Destaque</h2>
-					{!isLoading ? (
+					{isLoading ? (
 						<Loading />
 					) : (
 						<div className="row g-4">
 							{projects.slice(0, 6).map(project => (
-								<div className="col-md-6 col-lg-4" key={project.id}>
-									<div className="card shadow-sm h-100">
-										<img
-											src={project.image}
-											className="card-img-top"
-											alt={project.title}
-											style={{ height: '200px', objectFit: 'cover' }}
-										/>
-										<div className="card-body d-flex flex-column">
-											<h5
-												className="card-title fw-bold mb-2"
-												style={{
-													textOverflow: 'ellipsis',
-													overflow: 'hidden',
-													display: '-webkit-box',
-													WebkitLineClamp: 2,
-													WebkitBoxOrient: 'vertical',
-												}}
-											>
-												{project.title}
-											</h5>
-											<p className="card-text">
-												<strong>Natureza:</strong> {project.category}
-												<br />
-												<strong>Financiador:</strong> Fiocruz
-											</p>
-											<div className="mt-auto">
-												<Link
-													to={`/project/${project.id}`}
-													className="btn btn-primary"
-												>
-													Ver Detalhes
-												</Link>
-											</div>
-										</div>
-									</div>
-								</div>
+								<SmallProjectCard key={project.id} project={project} />
 							))}
 						</div>
 					)}
@@ -112,6 +95,7 @@ export function Home() {
 							<a
 								href={item.link}
 								target="_blank"
+								rel="noopener noreferrer"
 								className="list-group-item list-group-item-action"
 								key={index}
 							>
@@ -126,25 +110,20 @@ export function Home() {
 				<div className="container">
 					<h2 className="fw-bold text-center mb-5">Contato</h2>
 					<div className="row g-4">
-						<div className="col-md-6">
-							<h5 className="fw-bold">Rio de Janeiro (Sede)</h5>
-							<p>
-								Avenida Brasil, 4036, Manguinhos <br />
-								CEP: 21040-361 <br />
-								Telefone: +55 21 4040-4418 <br />
-								Horário: 8h às 17h
-							</p>
-						</div>
-						<div className="col-md-6">
-							<h5 className="fw-bold">Brasília (Escritório)</h5>
-							<p>
-								Avenida L3 Norte, Campus Universitário Darcy Ribeiro UNB Gleba
-								A, SC4 <br />
-								CEP: 70.904-970 <br />
-								Telefone: +55 61 4040-4803 <br />
-								Horário: 8h30 às 17h30
-							</p>
-						</div>
+						{contactInfo.map((info, index) => (
+							<div className="col-md-6" key={index}>
+								<h5 className="fw-bold">{info.location}</h5>
+								<p>
+									{info.address}
+									<br />
+									{info.postalCode}
+									<br />
+									Telefone: {info.phone}
+									<br />
+									{info.hours}
+								</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>
