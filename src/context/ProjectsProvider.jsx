@@ -11,6 +11,8 @@ export function ProjectsProvider({ children }) {
 
 	useEffect(() => {
 		const fetchProjects = async () => {
+			await new Promise(resolve => setTimeout(resolve, 2000));
+
 			try {
 				setIsLoading(true);
 				const response = await axios.get('http://localhost:4000/projetos');

@@ -25,12 +25,15 @@ export function TopProjects() {
 
 	return (
 		<div className="d-flex mt-5 flex-wrap lg-d-block flex-lg-nowrap mb-5">
-			<Aside onFilterChange={handleFilterChange} />
+			<Aside
+				onFilterChange={handleFilterChange}
+				selectedFilter={selectedFilter}
+			/>
 			<div className="container p-0">
 				<div className="d-flex justify-content-between align-items-center mb-4">
 					<h2 className="fs-5 fw-bold">Projetos em Destaque</h2>
 					<p className="text-muted mb-0">
-						Mostrando {filteredProjects.length} projetos
+						Mostrando {filteredProjects.length} de {projects.length} resultados.
 					</p>
 				</div>
 

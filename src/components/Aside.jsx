@@ -16,7 +16,7 @@ const filters = [
 	},
 ];
 
-export function Aside({ onFilterChange }) {
+export function Aside({ onFilterChange, selectedFilter }) {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
 	const toggleDropdown = () => {
@@ -40,7 +40,7 @@ export function Aside({ onFilterChange }) {
 							<li key={filter.value}>
 								<a
 									href="#"
-									className="text-decoration-none text-dark"
+									className={`text-decoration-none ${selectedFilter == filter.value ? 'text-info' : 'text-dark'}`}
 									onClick={e => {
 										e.preventDefault();
 										handleFilterClick(filter.value);
@@ -63,7 +63,7 @@ export function Aside({ onFilterChange }) {
 								type="button"
 								onClick={toggleDropdown}
 							>
-								Filtrar por categoria
+								{selectedFilter || 'Filtrar por categoria'}
 							</button>
 						</div>
 						<ul
