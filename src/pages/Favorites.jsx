@@ -1,16 +1,21 @@
 import React from 'react';
 
 import DeleteImage from '../assets/delete_icon.png';
+import { Loading } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
 import { useProjects } from '../hooks/useProjects';
 
 export function Favorites() {
-	const { projects } = useProjects();
+	const { projects, isLoading } = useProjects();
 	const { favorites, toggleFavorite } = useFavorites();
 
 	const favoriteProjects = projects.filter(project =>
 		favorites.includes(project.id),
 	);
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<div className="mt-5">
