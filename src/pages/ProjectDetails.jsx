@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { Aside } from '../../components/Aside';
-import { Loading } from '../../components/Loading';
-import { useFilter } from '../../hooks/useFilter';
-import { useProjects } from '../../hooks/useProjects';
+import { Aside } from '../components/Aside';
+import { Loading } from '../components/Loading';
+import { useFilter } from '../hooks/useFilter';
+import { useProjects } from '../hooks/useProjects';
 
 export function ProjectDetails() {
 	const { id } = useParams();

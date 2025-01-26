@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Loading } from '../../components/Loading';
-import { SmallProjectCard } from '../../components/SmallProjectCard';
-import { useProjects } from '../../hooks/useProjects';
+import { Loading } from '../components/Loading';
+import { SmallProjectCard } from '../components/SmallProjectCard';
+import { useProjects } from '../hooks/useProjects';
 
 export function Home() {
 	const { projects, isLoading } = useProjects();

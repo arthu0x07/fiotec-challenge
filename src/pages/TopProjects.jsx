@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 
 import HeartImage from '../../assets/heart_icon.png';
 import ViewImage from '../../assets/view_icon.png';
-import { Aside } from '../../components/Aside';
-import { Cardbutton } from '../../components/CardButton';
-import { Loading } from '../../components/Loading';
-import { useFavorites } from '../../hooks/useFavorites';
-import { useFilter } from '../../hooks/useFilter';
-import { useProjects } from '../../hooks/useProjects';
+import { Aside } from '../components/Aside';
+import { Cardbutton } from '../components/CardButton';
+import { Loading } from '../components/Loading';
+import { useFavorites } from '../hooks/useFavorites';
+import { useFilter } from '../hooks/useFilter';
+import { useProjects } from '../hooks/useProjects';
 
 export function TopProjects() {
 	const { isLoading, error, projects } = useProjects();

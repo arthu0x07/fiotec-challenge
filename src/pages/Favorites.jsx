@@ -1,8 +1,8 @@
 import React from 'react';
 
 import DeleteImage from '../../assets/delete_icon.png';
-import { useFavorites } from '../../hooks/useFavorites';
-import { useProjects } from '../../hooks/useProjects';
+import { useFavorites } from '../hooks/useFavorites';
+import { useProjects } from '../hooks/useProjects';
 
 export function Favorites() {
 	const { projects } = useProjects();
