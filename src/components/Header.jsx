@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logoImage from '../assets/logo.png';
@@ -93,6 +93,9 @@ export function Header() {
 									<NavLink
 										key={link.path}
 										to={link.path}
+										onClick={() => {
+											setMenuOpen(false);
+										}}
 										additionalClasses="mx-2"
 									>
 										{link.label}
