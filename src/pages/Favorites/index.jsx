@@ -1,11 +1,12 @@
 import React from 'react';
 
+import DeleteImage from '../../assets/delete_icon.png';
 import { useFavorites } from '../../hooks/useFavorites';
 import { useProjects } from '../../hooks/useProjects';
 
 export function Favorites() {
 	const { projects } = useProjects();
-	const { favorites } = useFavorites();
+	const { favorites, toggleFavorite } = useFavorites();
 
 	const favoriteProjects = projects.filter(project =>
 		favorites.includes(project.id),
@@ -34,8 +35,19 @@ export function Favorites() {
 							</div>
 
 							<div className="col-12 col-lg-9">
-								<div className="d-flex flex-column gap-3 justify-content-between h-100">
-									<h5 className="fw-bold mb-2">{project.title}</h5>
+								<div className="d-flex flex-column gap-3 justify-content-between h-100 position-relative">
+									<button
+										className="border-0 m-0 p-0 position-absolute top-0 end-0 rounded-circle bg-transparent d-flex justify-content-center align-items-center"
+										aria-label="Fechar"
+										onClick={() => toggleFavorite(project.id)}
+									>
+										<img
+											src={DeleteImage}
+											alt="botão de fechar"
+											style={{ width: '22px', height: '22px' }}
+										/>
+									</button>
+									<h5 className="fw-bold mb-2 pe-5">{project.title}</h5>
 									<p className="text-muted mb-0">{project.description}</p>
 								</div>
 							</div>
