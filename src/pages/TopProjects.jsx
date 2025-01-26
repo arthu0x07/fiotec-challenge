@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import HeartImage from '../../assets/heart_icon.png';
-import ViewImage from '../../assets/view_icon.png';
+import HeartImage from '../assets/heart_icon.png';
+import ViewImage from '../assets/view_icon.png';
 import { Aside } from '../components/Aside';
 import { Cardbutton } from '../components/CardButton';
 import { Loading } from '../components/Loading';

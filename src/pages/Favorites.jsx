@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DeleteImage from '../../assets/delete_icon.png';
+import DeleteImage from '../assets/delete_icon.png';
 import { useFavorites } from '../hooks/useFavorites';
 import { useProjects } from '../hooks/useProjects';
 
