@@ -13,7 +13,7 @@ export function ProjectsProvider({ children }) {
 		const fetchProjects = async () => {
 			try {
 				setIsLoading(true);
-				const response = await axios.get('http://localhost:3000/projetos');
+				const response = await axios.get('http://localhost:4000/projetos');
 				setProjects(response.data);
 			} catch (err) {
 				setError('Erro ao carregar os projetos. Tente novamente mais tarde.');
